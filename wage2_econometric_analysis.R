@@ -1,16 +1,17 @@
 
 
 # =============================================================
-# Wage2 Computer Exercise Script
-# Dataset: wooldridge::wage2
+# Econometric Analysis of Wage Determinants (Wooldridge wage2)
+# Methods: OLS, hypothesis tests, heteroskedasticity diagnostics,
+#          robust (HC1) standard errors, and WLS
 # =============================================================
 
 options(repos = c(CRAN = "https://cloud.r-project.org"))
 
 # Packages
-for (pkg in c("wooldridge", "lmtest", "sandwich", "car")) {
-  if (!requireNamespace(pkg, quietly = TRUE)) install.packages(pkg)
-}
+# Install packages if needed (run once):
+# install.packages(c("wooldridge","lmtest","sandwich","car"))
+
 library(wooldridge)
 library(lmtest)
 library(sandwich)
@@ -33,7 +34,7 @@ print(summary(m))
 
 # -----------------------------------------------------------------
 # 2. t-test for urban at 1% level (from summary output)
-#    -> question about significance of urban
+#    -> assess significance of urban
 # -----------------------------------------------------------------
 # (No extra code needed beyond summary(m), which reports t and p-values.)
 
@@ -65,7 +66,7 @@ cat("\n=== HC1 robust SEs (coeftest) ===\n")
 robust_ols <- coeftest(m, vcov = vcovHC(m, type = "HC1"))
 print(robust_ols)
 
-# The robust SE for educ (question 22) is:
+# The robust SE for educ is:
 educ_se_robust <- robust_ols["educ", "Std. Error"]
 cat("\nRobust HC1 SE for educ:", educ_se_robust, "\n")
 
@@ -77,11 +78,11 @@ mwls_educ <- lm(wage ~ educ + exper + urban, data = df, weights = 1/educ)
 summary_wls <- summary(mwls_educ)
 print(summary_wls)
 
-# Extract coefficient and SE for educ under WLS (questions 23 & 24)
+# Extract coefficient and SE for educ under WLS 
 educ_coef_wls <- coef(summary_wls)["educ", "Estimate"]
 educ_se_wls   <- coef(summary_wls)["educ", "Std. Error"]
 
 cat("\nWLS coefficient on educ:", educ_coef_wls, "\n")
 cat("WLS standard error for educ:", educ_se_wls, "\n")
 
-cat("\n=== End of wage2 Computer Exercise Script ===\n")
+cat("\n=== End of Econometric Analysis ===\n")
