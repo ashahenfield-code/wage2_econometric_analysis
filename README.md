@@ -1,13 +1,22 @@
 # Econometric Analysis of Wage Determinants
 
-This project uses the `wage2` dataset from the Wooldridge R package to explore determinants
-of wages among workers using OLS, robust standard errors, heteroskedasticity diagnostics,
-and weighted least squares.
+This project analyzes wage determinants using the `wage2` dataset from the Wooldridge R package.
+The analysis applies classical econometric methods to examine the relationship between wages,
+education, experience, and urban status.
 
-Methods applied:
-- Ordinary Least Squares regression
+## Methods
+- Ordinary Least Squares (OLS) regression
+- Joint F-tests for coefficient significance
 - Breusch–Pagan and White tests for heteroskedasticity
-- Robust HC1 standard errors
+- Robust (HC1) standard errors
 - Weighted Least Squares (WLS)
 
-Tools used: R, lmtest, sandwich, car
+## Tools
+- R
+- wooldridge
+- lmtest
+- sandwich
+- car
+
+This project demonstrates applied econometric modeling, statistical inference,
+and interpretation of regression results in an economic context.
